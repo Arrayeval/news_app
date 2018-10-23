@@ -10,7 +10,7 @@ import Live from './pages/Live'
 import Mine from './pages/Mine'
 import Video from './pages/Video'
 import TestDemo from './pages/TestDemo'
-
+import Ionicons from 'react-native-vector-icons/Ionicons';
 export default MainTab = createBottomTabNavigator ({
   // 自己的例子demo页面
   TestDemo: {
@@ -21,6 +21,10 @@ export default MainTab = createBottomTabNavigator ({
       headerStyle:styles.navigator,
       headerTitleStyle:styles.navigatorTitle,
       gesturesEnabled:true,
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        let iconName = `ios-information-circle${focused ? '' : '-outline'}`;
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      }
     })
   },
   Home: {
@@ -31,6 +35,10 @@ export default MainTab = createBottomTabNavigator ({
       headerStyle:styles.navigator,
       headerTitleStyle:styles.navigatorTitle,
       gesturesEnabled:true,
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        let iconName = `ios-home${focused ? '' : ''}`;
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      }
     })
   },
 
@@ -42,6 +50,10 @@ export default MainTab = createBottomTabNavigator ({
       headerStyle:styles.navigator,
       headerTitleStyle:styles.navigatorTitle,
       gesturesEnabled:true,
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        let iconName = `ios-tv${focused ? '' : ''}`;
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      }
     })
   },
 
@@ -53,6 +65,10 @@ export default MainTab = createBottomTabNavigator ({
       headerStyle:styles.navigator,
       headerTitleStyle:styles.navigatorTitle,
       gesturesEnabled:true,
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        let iconName = `ios-videocam${focused ? '' : ''}`;
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      }
     })
   },
   
@@ -64,6 +80,10 @@ export default MainTab = createBottomTabNavigator ({
       headerStyle:styles.navigator,
       headerTitleStyle:styles.navigatorTitle,
       gesturesEnabled:true,
+      tabBarIcon: ({ focused, horizontal, tintColor }) => {
+        let iconName = `ios-person${focused ? '' : ''}`;
+        return <Ionicons name={iconName} size={horizontal ? 20 : 25} color={tintColor} />;
+      }
     })
   },
 },{

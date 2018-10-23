@@ -260,7 +260,7 @@ export default class VideoPlayer extends React.Component {
     // let isPaused = !this.state.isPaused
     this.setState({
         isShowControll: isShow,
-        // isPaused: isPaused 
+      
     })
   }
 
@@ -310,8 +310,8 @@ export default class VideoPlayer extends React.Component {
     if (this.state.isFullScreen) {
       Orientation.lockToPortrait()
     }else{
-      // this.props.onTapBackButton && this.props.onTapBackButton()
-      this.props.navigation.goBack()
+      this.props.onTapBackButton && this.props.onTapBackButton()
+      // this.props.navigation.goBack()
     }
   }
 
