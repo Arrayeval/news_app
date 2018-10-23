@@ -53,14 +53,6 @@ export default class VideoPlayer extends React.Component {
     }
   }
 
-  // 播放按钮
-  _onTapVideo = () => {
-    let isShow = !this.state.isShowControll
-    this.setState({
-      isShowControll: isShow
-    })
-  }
-
   render () {
     return (
       <View style={[this.props.style, {width: this.state.videoWidth, height: this.state.videoHeight, background: '#000'}]}> 
@@ -95,7 +87,7 @@ export default class VideoPlayer extends React.Component {
       }
 
       {/*点击（停止、开始）播放*/}
-      <TouchableWithoutFeedback onPress = {this._onTapVideo}>
+      <TouchableWithoutFeedback onPress ={this._onTapPlayButton}>
         <View
           style={{
             position: 'absolute',
@@ -130,13 +122,13 @@ export default class VideoPlayer extends React.Component {
           {/*播放暂停按钮*/}
           <TouchableOpacity activeOpacity={0.3} onPress ={this._onTapPlayButton}>
             <Image 
-              style={style.control_play_btn}
+              style={styles.control_play_btn}
               source = {this.state.pause ? require('../../assets/images/icon_control_play.png'): require('../../assets/images/icon_control_pause.png')}
             />
           </TouchableOpacity>
 
           {/*播放时间*/}
-          <Text style={styles.timeText}>{Utils.formatTime(this.props.currentTime)}</Text>
+          <Text style={styles.timeText}>{Utils.formatTime(this.state.currentTime)}</Text>
           
           {/*进度条*/}
           <Slider
@@ -154,16 +146,17 @@ export default class VideoPlayer extends React.Component {
           {/*是否允许横屏*/}
           {
             this.props.enableSwitchScreen ? 
-              <TouchableOpacity activeOpacity={0.3} onPress={this.state.duration}>
+              <TouchableOpacity activeOpacity={0.3} onPress={this._onTapSwitchButton}>
                 <Image
                   style={styles.control_switch_btn}
                   source={this.state.isFullScreen ? require('../../assets/images/icon_control_shrink_screen.png') : require('../../assets/images/icon_control_full_screen.png')}
                 />
               </TouchableOpacity> : null 
           }
-          
-          {/*已经是全屏的状态*/}
-          {
+        </View> : null
+      }
+       {/*已经是全屏的状态*/}
+       {
             this.state.isFullScreen && this.state.isShowControll ? 
               <View
                 style={{
@@ -185,10 +178,11 @@ export default class VideoPlayer extends React.Component {
                         source={require('../../assets/images/icon_back.png')}
                         style={{width:26, height:26}}
                     />
-                    </TouchableOpacity>
-                    <Text style={styles.videoTitle}>{this.state.videoTitle}</Text>
+                  </TouchableOpacity>
+                  <Text style={styles.videoTitle}>{this.state.videoTitle}</Text>
               </View> : null
           }
+          {/*非全屏的返回按钮*/}
           {
             this.state.isFullScreen ? null :
             <TouchableOpacity
@@ -209,8 +203,6 @@ export default class VideoPlayer extends React.Component {
               />
             </TouchableOpacity>
           }
-        </View> : null
-      }
     </View>
     )
   }
@@ -236,10 +228,10 @@ export default class VideoPlayer extends React.Component {
 
   //当前进度
   _onProgressChange = (data) => {
-      if (!this.state.isPaused) {
-          this.setState({
-              currentTime: data.currentTime,
-          })
+    if (!this.state.isPaused) {
+        this.setState({
+            currentTime: data.currentTime,
+        })
       }
   }
 
@@ -264,10 +256,12 @@ export default class VideoPlayer extends React.Component {
    * 控制栏点击事件
    */
   _onTapVideo = () => {
-      let isShow = !this.state.isShowControll
-      this.setState({
-          isShowControll: isShow
-      })
+    let isShow = !this.state.isShowControll
+    // let isPaused = !this.state.isPaused
+    this.setState({
+        isShowControll: isShow,
+        // isPaused: isPaused 
+    })
   }
 
   _onTapPlayButton = () => {
@@ -278,17 +272,17 @@ export default class VideoPlayer extends React.Component {
       }
 
       this.setState({
-          isPaused: isPaused,
-          isShowControll: isShowControll,
-          isShowVideoCover: false,
-          pause: !this.state.isPaused,
+        isPaused: isPaused,
+        isShowControll: isShowControll,
+        isShowVideoCover: false,
+        pause: !this.state.isPaused,
       })
 
       if (this.state.playFromBeginning) {
-          this.videoRef.seek(0)
-          this.setState({
-              playFromBeginning: false
-          })
+        this.videoRef.seek(0)
+        this.setState({
+            playFromBeginning: false
+        })
       }
   }
 
@@ -296,15 +290,15 @@ export default class VideoPlayer extends React.Component {
       this.videoRef.seek(currentTime)
 
       if (this.state.isPaused) {
-          this.setState({
-              currentTime: currentTime,
-              isPaused: false,
-              isShowVideoCover: false
-          })
+        this.setState({
+          currentTime: currentTime,
+          isPaused: false,
+          isShowVideoCover: false
+        })
       }else{
-          this.setState({
-              currentTime: currentTime
-          })
+        this.setState({
+          currentTime: currentTime
+        })
       }
   } 
 
@@ -313,47 +307,34 @@ export default class VideoPlayer extends React.Component {
   }
 
   _onTapBackButton = () => {
-      if (this.state.isFullScreen) {
-          Orientation.lockToPortrait()
-      }else{
-          this.props.onTapBackButton && this.props.onTapBackButton()
-      }
+    if (this.state.isFullScreen) {
+      Orientation.lockToPortrait()
+    }else{
+      // this.props.onTapBackButton && this.props.onTapBackButton()
+      this.props.navigation.goBack()
+    }
   }
 
+  // 供外部调用
   updateVideo(videoUrl, seekTime, videoTitle) {
-      this.setState({
-          videoUrl: videoUrl,
-          videoTitle: videoTitle,
-          currentTime: seekTime,
-          isPaused: false,
-          isShowVideoCover: false,
-      })
-
-      this.videoRef.seek(seekTime)
+    this.setState({
+      videoUrl: videoUrl,
+      videoTitle: videoTitle,
+      currentTime: seekTime,
+      isPaused: false,
+      isShowVideoCover: false,
+    })
+    this.videoRef.seek(seekTime)
   }
 
+  // 供外部调用
   updateLayout(width, height, isFullScreen) {
-      this.setState({
-          videoWidth: width,
-          videoHeight: height,
-          isFullScreen: isFullScreen,
-      })
+    this.setState({
+      videoWidth: width,
+      videoHeight: height,
+      isFullScreen: isFullScreen,
+    })
   }
-
-}
-
-export function formatTime(second) {
-  let h = 0, i = 0, s = parseInt(second)
-  if (s > 60) {
-      i = parseInt(s / 60)
-      s = parseInt(s % 60)
-  }
-  //补零
-  let zero = function (v) {
-      return (v >> 0) < 10 ? '0' + v : v
-  }
-
-  return [zero(h), zero(i), zero(s)].join(':');
 }
 
 const styles = StyleSheet.create({
@@ -392,10 +373,11 @@ const styles = StyleSheet.create({
   },
   backButton: {
     flexDirection:'row',
-    width: 44,
-    height: 44,
     alignItems:'center',
     justifyContent:'center',
+    top:0,
+    width: 44,
+    height: 44,
     marginLeft: 10
   },
 });

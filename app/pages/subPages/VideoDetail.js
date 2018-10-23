@@ -50,7 +50,7 @@ export default class VideoDetail extends PureComponent{
 }
 
   _onClickBackButton = () => {
-      this.props.navigation.goBack()
+    this.props.navigation.goBack()
   }
 
   _onLayoutChange = (event) => {

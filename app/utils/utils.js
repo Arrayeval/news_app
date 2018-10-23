@@ -1,6 +1,6 @@
 export default  utils = {
   // 时间格式化
-  formatTime (second) {
+  formatTime (second = 0) {
     let h = 0, i = 0, s = parseInt(second)
     if (s > 60) {
         i = parseInt(s / 60)
