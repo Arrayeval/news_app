@@ -10,6 +10,8 @@ import {
   Image,
   ScrollView,
 }from 'react-native'
+import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
+import VideoFlatListView from '../components/VideoFlatListView'
 export default class Video extends PureComponent{
   render () {
     return  (
