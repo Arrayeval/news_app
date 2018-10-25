@@ -66,3 +66,17 @@ export default class Video extends PureComponent{
     )
   }
 }
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    backgroundColor: "#f8f8f8",
+    paddingTop:10
+  },
+  tabViewItemContainer: {
+    flex:1,
+    backgroundColor:'#FFCCCC',
+    justifyContent: 'center',
+    alignItems:"center"
+  }
+
+})
