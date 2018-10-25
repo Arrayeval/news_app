@@ -8,15 +8,60 @@ import {
   View,
   Alert,
   Image,
+  StatusBar,
   ScrollView,
 }from 'react-native'
 import ScrollableTabView, {ScrollableTabBar} from 'react-native-scrollable-tab-view'
 import VideoFlatListView from '../components/VideoFlatListView'
+
+const  {width:screenWidth, height: screenHeight} = Dimensions.get('window')
 export default class Video extends PureComponent{
+  constructor (props) {
+    super(props)
+  }
+  tabArr = [
+    {columnName: '推荐', requestCode: 'home'},
+    {columnName: '搞笑', requestCode: 'home'},
+    {columnName: '影视', requestCode: 'home'},
+    {columnName: '音乐', requestCode: 'home'},
+    {columnName: '现场', requestCode: 'home'},
+    {columnName: '黑科技', requestCode: 'home'},
+    {columnName: '小品', requestCode: 'home'},
+    {columnName: '萌物', requestCode: 'home'},
+    {columnName: '猎奇', requestCode: 'home'},
+    {columnName: '军武', requestCode: 'home'},
+    {columnName: '涨姿势', requestCode: 'home'}
+  ]
   render () {
     return  (
-      <View>
-         <Text>this is Video page </Text>
+      <View style={styles.container}>
+        <Statusbar backgroundColor={'rgba(255, 255, 255, 0)'} translucent= {true} animated={true} />
+        <View style={styles.container}>
+          <ScrollableTabView
+            ref = "tabView"
+            renderTabBar = {() => <ScrollableTabBar style={{borderBottomWidth:0, paddingBottom:5, width: screenWidth}} /> }
+            tabBarUnderlineStyle = {{height: 2, minWidth:Math.floor(screenWidth * 0.9 /5), backgroundColor: 'rgba(216,30,6,.8)'}}
+            tabBarInactiveTextColor="#515151"
+            tabBarActiveTextColor = "#d81e06"
+            tabBarTextStyle = {{fontSize: 15}}
+            locked = {false}
+            initialPage = {0}
+          >
+            {
+              this.tabArr.map(item => {
+                return (
+                  <VideoFlatListView 
+                    key = {item.columnName}
+                    tabLabel = {item.columnName}
+                    requestCode = {item.requestCode}
+                    navigation = {this.props.navigation}
+                  />
+                )
+              })
+            }
+          </ScrollableTabView>
+        </View>
+        <Text>this is Video page </Text>
       </View>
     )
   }
