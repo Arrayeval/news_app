@@ -7,11 +7,11 @@ React-native编写的网易新闻app demo,学习为目的 [当前只开发了and
 > * 3）react-native run-android --variant=release 打包apk
 
 ### 文章学习
-```
+
 > * https://bbs.reactnative.cn/topic/10/%E5%9C%A8windows%E4%B8%8B%E6%90%AD%E5%BB%BAreact-native-android%E5%BC%80%E5%8F%91%E7%8E%AF%E5%A2%83/2
 > * https://www.jianshu.com/p/505965377ac6
-  http://www.cnblogs.com/gaosheng-221/p/6954434.html
-```
+> *  http://www.cnblogs.com/gaosheng-221/p/6954434.html
+
 
 ## 开发问题总结，以及解决
 ### Unable to load script from assets 'index.android.bundle'.解决方案
