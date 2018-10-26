@@ -25,6 +25,6 @@ react-native bundle --platform android --dev false --entry-file index.js --bundl
 ```
 ### 打包apk第三方库SDK更新不及时，导致失败：
 ```
-【Execution failed for task ':react-native-version-number:verifyReleaseResources'】
+demo: Execution failed for task ':react-native-version-number:verifyReleaseResources'
 ```
 > * https://blog.csdn.net/klo220/article/details/83380657
