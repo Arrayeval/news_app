@@ -35,7 +35,7 @@ export default class Video extends PureComponent{
   render () {
     return  (
       <View style={styles.container}>
-        <Statusbar backgroundColor={'rgba(255, 255, 255, 0)'} translucent= {true} animated={true} />
+        <StatusBar backgroundColor={'rgba(255, 255, 255, 0)'} translucent= {true} animated={true} />
         <View style={styles.container}>
           <ScrollableTabView
             ref = "tabView"
@@ -61,7 +61,6 @@ export default class Video extends PureComponent{
             }
           </ScrollableTabView>
         </View>
-        <Text>this is Video page </Text>
       </View>
     )
   }

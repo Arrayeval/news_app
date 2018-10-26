@@ -55,7 +55,7 @@ export default class HomeFlatListView extends PureComponent {
     _renderFooter = () => {
       let len = this.state.sourceData.length
       return(
-        <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:len<1?0:40}}> 
+        <View style={{flexDirection:'row', justifyContent:'center', alignItems:'center', height:len<1?20:40}}> 
            <Image source={require("./../../assets/images/i_loading.gif")} resizeMode={'contain'} style={{width:20, height:20, marginRight: 5, height:len<1?0:40}} />
            <Text style={{color:'#515151'}}>正在加载...</Text>
         </View>
@@ -82,7 +82,7 @@ export default class HomeFlatListView extends PureComponent {
     setFlatListHeight = (e) => {
       let height = e.nativeEvent.layout.height;
       if (this.state.flatHeight < height) {
-          this.setState({flatHeight:height})
+        this.setState({flatHeight:height})
       }
     }
 
@@ -102,11 +102,11 @@ export default class HomeFlatListView extends PureComponent {
 
     _renderItem = ({item}) => {
       return(
-          <HomeFlatListItem 
-              item={item}
-              onPressItem={this._onPressItem}
-              selected={this.state.selected === item.id}
-          />
+        <HomeFlatListItem 
+          item={item}
+          onPressItem={this._onPressItem}
+          selected={this.state.selected === item.id}
+        />
       )
     }
 
