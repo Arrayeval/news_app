@@ -1,5 +1,10 @@
 # news_app
-React-native编写的网易新闻app demo,学习为目的
+React-native编写的网易新闻app demo,学习为目的 [当前只开发了android版本]
+
+### 运行
+> * 1）搭建环境
+> * 2）react-native start --reset-cache / react-native run-android 
+> * 3）react-native run-android --variant=release 打包apk
 
 ### 文章学习
 ```
